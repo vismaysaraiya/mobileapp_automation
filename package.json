@@ -1,0 +1,36 @@
+{
+  "name": "mobileapp_automation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:mobile-chrome": "playwright test --project=\"Mobile Chrome - Pixel 7\"",
+    "test:mobile-safari": "playwright test --project=\"Mobile Safari - iPhone 14\"",
+    "report:html": "playwright show-report reports/html-report",
+    "report:allure": "allure generate reports/allure-results --clean -o reports/allure-report && allure open reports/allure-report",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vismaysaraiya/mobileapp_automation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/vismaysaraiya/mobileapp_automation/issues"
+  },
+  "homepage": "https://github.com/vismaysaraiya/mobileapp_automation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.0",
+    "allure-commandline": "^2.43.0",
+    "allure-playwright": "^3.10.2",
+    "dotenv": "^17.4.2",
+    "typescript": "^6.0.3"
+  }
+}

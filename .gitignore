@@ -1,0 +1,7 @@
+NMMT_1.1.1_new_commuter_7_7_2026
+node_modules/
+reports/
+test-results/
+playwright-report/
+.env
+*.log
