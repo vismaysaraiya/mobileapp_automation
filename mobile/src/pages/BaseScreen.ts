@@ -40,6 +40,12 @@ export class BaseScreen {
     await el.click();
   }
 
+  async tapDescContains(text: string, timeout = 20000): Promise<void> {
+    const el = this.byDescContains(text);
+    await el.waitForDisplayed({ timeout });
+    await el.click();
+  }
+
   /** For items inside a scrollable list (e.g. the More menu) that may be below
    * the fold - UiScrollable scrolls the nearest scrollable container until the
    * target description is visible, then returns it already on-screen. */

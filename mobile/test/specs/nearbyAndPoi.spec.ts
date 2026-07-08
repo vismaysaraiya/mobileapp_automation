@@ -23,4 +23,12 @@ describe('Nearby Bus Stops and POI (guest)', () => {
     // TC_004's "select a POI from results" step needs an environment with data.
     await nearbyAttraction.expectCategoryVisible('Near by Groceries');
   });
+
+  it('TC_006 - handles an invalid/unmatched POI search without crashing', async () => {
+    await home.openNearbyAttraction();
+    await nearbyAttraction.search('zzzInvalidPoi123');
+    // No seeded POI matches this input on this backend - the category count
+    // updates to (0) rather than the app crashing or hanging.
+    await nearbyAttraction.expectCategoryVisible('Near by Groceries (0)');
+  });
 });
