@@ -1,6 +1,7 @@
 import type { Options } from '@wdio/types';
 import * as dotenv from 'dotenv';
 import { execFileSync } from 'child_process';
+import JsonResultsReporter from './src/reporters/JsonResultsReporter';
 
 dotenv.config();
 
@@ -40,10 +41,10 @@ export const config: Options.Testrunner = {
   // (invoked via `npm run test:android`), not by @wdio/appium-service - see
   // that script for why.
   hostname: '127.0.0.1',
-  port: 4723,
+  port: Number(process.env.APPIUM_PORT) || 4723,
   path: '/',
   framework: 'mocha',
-  reporters: ['spec'],
+  reporters: ['spec', JsonResultsReporter],
   mochaOpts: {
     ui: 'bdd',
     timeout: 120000,

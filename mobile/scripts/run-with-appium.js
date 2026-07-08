@@ -8,7 +8,9 @@
 const { spawn } = require('child_process');
 const http = require('http');
 
-const APPIUM_PORT = 4723;
+// Overridable so a stuck/unkillable orphaned Appium process on the default
+// port doesn't block every subsequent run - just set APPIUM_PORT and re-run.
+const APPIUM_PORT = Number(process.env.APPIUM_PORT) || 4723;
 const READY_TIMEOUT_MS = 30000;
 
 function waitForAppium(port, timeoutMs) {
@@ -54,7 +56,11 @@ async function main() {
   }
 
   const wdioArgs = ['wdio', 'run', './mobile/wdio.conf.ts', ...process.argv.slice(2)];
-  const wdio = spawn('npx', wdioArgs, { shell: true, stdio: 'inherit' });
+  const wdio = spawn('npx', wdioArgs, {
+    shell: true,
+    stdio: 'inherit',
+    env: { ...process.env, APPIUM_PORT: String(APPIUM_PORT) },
+  });
 
   wdio.on('exit', (code) => {
     cleanup();

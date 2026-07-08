@@ -1,0 +1,127 @@
+{
+  "TC_001": {
+    "specFile": "nearbyAndPoi.spec.ts",
+    "scope": "full",
+    "note": "Nearby Stops map and current-location marker verified on Home."
+  },
+  "TC_004": {
+    "specFile": "nearbyAndPoi.spec.ts",
+    "scope": "partial",
+    "note": "POI screen opens and category chips load; this dev backend has no seeded POI data to select a result from."
+  },
+  "TC_006": {
+    "specFile": "nearbyAndPoi.spec.ts",
+    "scope": "full",
+    "note": "Invalid/unmatched POI search verified to return a clean zero-result state without crashing."
+  },
+  "TC_007": {
+    "specFile": "trackABus.spec.ts",
+    "scope": "partial",
+    "note": "Route number lookup opens Route Details; no vehicle is actually broadcasting live GPS on this backend to verify real-time position."
+  },
+  "TC_009": {
+    "specFile": "timeTable.spec.ts",
+    "scope": "full",
+    "note": "\"No routes available\" default state verified before any search is performed."
+  },
+  "TC_013": {
+    "specFile": "journeyPlanner.spec.ts",
+    "scope": "partial",
+    "note": "Source station picker with map opens correctly; this dev backend returns no nearby stops for the emulator's mock GPS location."
+  },
+  "TC_015": {
+    "specFile": "journeyPlanner.spec.ts",
+    "scope": "full",
+    "note": "Missing-source-station validation error verified."
+  },
+  "TC_016": {
+    "specFile": "favourites.spec.ts",
+    "scope": "partial",
+    "note": "Favourites screen opens with the correct empty state; no in-screen control to add a favourite (added via search results elsewhere, which is itself blocked - see TC_013)."
+  },
+  "TC_019": {
+    "specFile": "fareCalculator.spec.ts",
+    "scope": "deferred",
+    "note": "Reactive source/destination fare lookup is implemented but intermittently times out even at 30s with a retry - needs further investigation before it's considered reliable."
+  },
+  "TC_021": {
+    "specFile": "fareCalculator.spec.ts",
+    "scope": "full",
+    "note": "Verified the reactive fare lookup does not fire while destination is still unselected."
+  },
+  "TC_025": {
+    "specFile": "quickTicket.spec.ts",
+    "scope": "partial",
+    "note": "Real seeded routes list and stop-selection screen verified; completing a booking needs wallet funds or a live payment gateway."
+  },
+  "TC_029": {
+    "specFile": "myTicket.spec.ts",
+    "scope": "partial",
+    "note": "Correct empty state verified for an account with no booked ticket (booking itself is blocked - see TC_025)."
+  },
+  "TC_031": {
+    "specFile": "myPass.spec.ts",
+    "scope": "full",
+    "note": "All four pass categories (Route Specific, Senior Citizen, Handicapped, Magical) verified visible."
+  },
+  "TC_049": {
+    "specFile": "wallet.spec.ts",
+    "scope": "full",
+    "note": "\"Wallet not created\" pre-top-up state verified."
+  },
+  "TC_050": {
+    "specFile": "wallet.spec.ts",
+    "scope": "partial",
+    "note": "Reaches payment mode selection (Razorpay) for a wallet top-up; completing it needs a live payment gateway sandbox."
+  },
+  "TC_054": {
+    "specFile": "myPass.spec.ts",
+    "scope": "full",
+    "note": "Transit product durations (Monthly/Weekly/Quarterly/Half-Yearly/Yearly) verified for a Route Specific Pass."
+  },
+  "TC_061": {
+    "specFile": "scheduledTrips.spec.ts",
+    "scope": "partial",
+    "note": "Scheduled Trips screen opens with the correct empty state; no in-screen control found to save a journey in advance."
+  },
+  "TC_062": {
+    "specFile": "travelStatistics.spec.ts",
+    "scope": "full",
+    "note": "Travel Statistics widgets (Tickets Purchased, Fare Spent, Most Traveled Routes) verified in their correct zeroed/no-history state."
+  },
+  "TC_068": {
+    "specFile": "sos.spec.ts",
+    "scope": "partial",
+    "note": "Emergency screen with vehicle selector and Send SOS control verified visible; the control is deliberately never tapped since it fires a real alert to TMC on a shared backend."
+  },
+  "TC_072": {
+    "specFile": "shareLocation.spec.ts",
+    "scope": "partial",
+    "note": "Current location resolves and share-via options (SMS/Email/WhatsApp/Contacts) are verified present; stops short of handing off to a real OS share intent."
+  },
+  "TC_075": {
+    "specFile": "grievance.spec.ts",
+    "scope": "deferred",
+    "note": "Grievance form-fill flow (category, description, date/time) is implemented but intermittently fails past the category/date-time step - needs further investigation."
+  },
+  "TC_077": {
+    "specFile": "grievance.spec.ts",
+    "scope": "full",
+    "note": "Missing-category validation error verified on submit."
+  },
+  "TC_082": {
+    "specFile": "feedback.spec.ts",
+    "scope": "full",
+    "note": "Missing-category validation error verified on submit."
+  },
+  "TC_083": {
+    "specFile": "feedback.spec.ts",
+    "scope": "partial",
+    "note": "Correct no-data state verified for an account with no submitted feedback (the feedback category selector itself is broken app-side, blocking a real submission)."
+  },
+  "TC_085": {
+    "specFile": "loginGating.spec.ts",
+    "scope": "full",
+    "note": "Guest access to My Grievance / Feedback Status verified blocked, redirecting straight to Login."
+  }
+}

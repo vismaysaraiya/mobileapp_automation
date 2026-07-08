@@ -13,7 +13,8 @@
     "report:allure": "allure generate reports/allure-results --clean -o reports/allure-report && allure open reports/allure-report",
     "typecheck": "tsc --noEmit",
     "test:android": "node mobile/scripts/run-with-appium.js",
-    "test:android:spec": "node mobile/scripts/run-with-appium.js --spec"
+    "test:android:spec": "node mobile/scripts/run-with-appium.js --spec",
+    "report:mobile": "node mobile/scripts/generate-report.js"
   },
   "repository": {
     "type": "git",

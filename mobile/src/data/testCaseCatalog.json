@@ -1,0 +1,552 @@
+[
+  {
+    "id": "TC_001",
+    "module": "Mobile App > Nearby Bus Stops",
+    "description": "Verify app shows nearby bus stops on map using user geo-location."
+  },
+  {
+    "id": "TC_002",
+    "module": "Mobile App > Nearby Bus Stops",
+    "description": "Verify app updates nearby stops when user location changes."
+  },
+  {
+    "id": "TC_003",
+    "module": "Mobile App > Nearby Bus Stops",
+    "description": "Negative: Verify app behaviour when location permission is denied."
+  },
+  {
+    "id": "TC_004",
+    "module": "Mobile App > POI Search",
+    "description": "Verify user can search POI by name/area/address and view it on map."
+  },
+  {
+    "id": "TC_005",
+    "module": "Mobile App > POI Navigation",
+    "description": "Verify app shows walking path or transport suggestion from user location to POI."
+  },
+  {
+    "id": "TC_006",
+    "module": "Mobile App > POI Search",
+    "description": "Negative: Verify invalid/blank POI search input handling."
+  },
+  {
+    "id": "TC_007",
+    "module": "Mobile App > ETA at Source",
+    "description": "Verify ETA and bus location are shown when searching by Route Number."
+  },
+  {
+    "id": "TC_008",
+    "module": "Mobile App > Route Options",
+    "description": "Verify available routes/buses are listed when searching by Origin and Destination."
+  },
+  {
+    "id": "TC_009",
+    "module": "Mobile App > ETA at Source",
+    "description": "Negative: Verify behaviour when no buses/routes are available for selected input."
+  },
+  {
+    "id": "TC_010",
+    "module": "Mobile App > ETA to Destination",
+    "description": "Verify app shows bus position on route map and ETA to selected destination."
+  },
+  {
+    "id": "TC_011",
+    "module": "Mobile App > Destination Alarm",
+    "description": "Verify user can set destination alarm for configurable time before destination."
+  },
+  {
+    "id": "TC_012",
+    "module": "Mobile App > Destination Alarm",
+    "description": "Negative: Verify alarm is not set when destination is not selected or invalid."
+  },
+  {
+    "id": "TC_013",
+    "module": "Mobile App > Journey Planner",
+    "description": "Verify journey planner shows possible journey options between origin and destination."
+  },
+  {
+    "id": "TC_014",
+    "module": "Mobile App > Journey Planner",
+    "description": "Verify journey options can be filtered by Shortest Time / Fare / Minimum transits."
+  },
+  {
+    "id": "TC_015",
+    "module": "Mobile App > Journey Planner",
+    "description": "Negative: Verify journey planner validation for missing origin/destination."
+  },
+  {
+    "id": "TC_016",
+    "module": "Mobile App > Favourites",
+    "description": "Verify user can mark route/stop as favourite."
+  },
+  {
+    "id": "TC_017",
+    "module": "Mobile App > Notifications",
+    "description": "Verify daily service status notification is received for favourite routes."
+  },
+  {
+    "id": "TC_018",
+    "module": "Mobile App > Notifications",
+    "description": "Negative: Verify notification is not sent when favourites are not configured."
+  },
+  {
+    "id": "TC_019",
+    "module": "Mobile App > Fare Calculator",
+    "description": "Verify fare calculation based on route, type and stops."
+  },
+  {
+    "id": "TC_020",
+    "module": "Mobile App > Fare Calculator",
+    "description": "Verify fare changes based on journey type and transits."
+  },
+  {
+    "id": "TC_021",
+    "module": "Mobile App > Fare Calculator",
+    "description": "Negative: Verify validation for incomplete fare inputs."
+  },
+  {
+    "id": "TC_022",
+    "module": "Mobile App > Announcements",
+    "description": "Verify announcements pushed from TMC are received as notifications."
+  },
+  {
+    "id": "TC_023",
+    "module": "Mobile App > Announcements",
+    "description": "Verify announcements are visible in the announcements tab."
+  },
+  {
+    "id": "TC_024",
+    "module": "Mobile App > Announcements",
+    "description": "Negative: Verify duplicate announcement notifications are not shown."
+  },
+  {
+    "id": "TC_025",
+    "module": "Mobile App > Mobile Ticketing",
+    "description": "Verify ticket booking by selecting route and stops."
+  },
+  {
+    "id": "TC_026",
+    "module": "Mobile App > Mobile Ticketing",
+    "description": "Verify route suggestion when booking by start and end stop only."
+  },
+  {
+    "id": "TC_027",
+    "module": "Mobile App > Mobile Ticketing",
+    "description": "Negative: Verify booking is blocked for invalid stop combinations."
+  },
+  {
+    "id": "TC_028",
+    "module": "Mobile App > Ticket Booking",
+    "description": "Verify ticket booking completes successfully for valid route/stop selection."
+  },
+  {
+    "id": "TC_029",
+    "module": "Mobile App > Ticket Booking",
+    "description": "Verify booked ticket appears in active tickets list."
+  },
+  {
+    "id": "TC_030",
+    "module": "Mobile App > Ticket Booking",
+    "description": "Negative: Verify booking failure on payment error."
+  },
+  {
+    "id": "TC_031",
+    "module": "Mobile App > Pass Issuance",
+    "description": "Verify user can view available NMMT pass categories in the app."
+  },
+  {
+    "id": "TC_032",
+    "module": "Mobile App > Pass Issuance",
+    "description": "Verify successful issuance of a category pass through mobile app."
+  },
+  {
+    "id": "TC_033",
+    "module": "Mobile App > Pass Issuance",
+    "description": "Negative: Verify pass issuance is blocked for invalid inputs."
+  },
+  {
+    "id": "TC_034",
+    "module": "Mobile App > Pass Configuration",
+    "description": "Verify newly configured pass categories are visible in mobile app."
+  },
+  {
+    "id": "TC_035",
+    "module": "Mobile App > Pass Configuration",
+    "description": "Verify removal/deactivation of pass category reflects in app."
+  },
+  {
+    "id": "TC_036",
+    "module": "Mobile App > Pass Configuration",
+    "description": "Negative: Verify invalid category configuration does not crash app."
+  },
+  {
+    "id": "TC_037",
+    "module": "Mobile App > QR Ticket",
+    "description": "Verify QR code is generated for booked ticket and pass."
+  },
+  {
+    "id": "TC_038",
+    "module": "Mobile App > QR Validation",
+    "description": "Verify QR code cannot be validated more than once."
+  },
+  {
+    "id": "TC_039",
+    "module": "Mobile App > QR Validation",
+    "description": "Negative: Verify expired ticket/pass QR code is rejected."
+  },
+  {
+    "id": "TC_040",
+    "module": "Mobile App > Card Recharge",
+    "description": "Verify NMMT smart card recharge through mobile app."
+  },
+  {
+    "id": "TC_041",
+    "module": "Mobile App > Card Recharge",
+    "description": "Verify NCMC card recharge redirects to external link or integrated flow."
+  },
+  {
+    "id": "TC_042",
+    "module": "Mobile App > Card Recharge",
+    "description": "Negative: Verify invalid card number is rejected."
+  },
+  {
+    "id": "TC_043",
+    "module": "Mobile App > Payment",
+    "description": "Verify mobile app supports multiple payment options."
+  },
+  {
+    "id": "TC_044",
+    "module": "Mobile App > Payment",
+    "description": "Verify successful payment completion through a payment gateway."
+  },
+  {
+    "id": "TC_045",
+    "module": "Mobile App > Payment",
+    "description": "Negative: Verify app handles payment failure/time-out correctly."
+  },
+  {
+    "id": "TC_046",
+    "module": "Mobile App > Card Recharge",
+    "description": "Verify user can recharge Open Loop card through mobile app."
+  },
+  {
+    "id": "TC_047",
+    "module": "Mobile App > Card Recharge",
+    "description": "Verify user can recharge Close Loop card through mobile app."
+  },
+  {
+    "id": "TC_048",
+    "module": "Mobile App > Card Recharge",
+    "description": "Negative: Verify recharge is blocked for invalid amount/card number."
+  },
+  {
+    "id": "TC_049",
+    "module": "Mobile App > Wallet",
+    "description": "Verify user can create wallet with minimum details and disclaimer."
+  },
+  {
+    "id": "TC_050",
+    "module": "Mobile App > Wallet Recharge",
+    "description": "Verify wallet can be recharged via payment gateway and balance is updated in Points."
+  },
+  {
+    "id": "TC_051",
+    "module": "Mobile App > Wallet Payment",
+    "description": "Verify points are deducted correctly when booking ticket using wallet."
+  },
+  {
+    "id": "TC_052",
+    "module": "Mobile App > Wallet",
+    "description": "Negative: Verify wallet creation is blocked when disclaimer is not accepted."
+  },
+  {
+    "id": "TC_053",
+    "module": "Mobile App > Wallet Recharge",
+    "description": "Negative: Verify wallet recharge failure does not update points balance."
+  },
+  {
+    "id": "TC_054",
+    "module": "Mobile App > Transit Products",
+    "description": "Verify transit products list includes Monthly/Daily/Student and other pass categories."
+  },
+  {
+    "id": "TC_055",
+    "module": "Mobile App > Transit Products",
+    "description": "Verify issuance flow works for a selected transit product type (e.g., Student Pass)."
+  },
+  {
+    "id": "TC_056",
+    "module": "Mobile App > Transit Products",
+    "description": "Negative: Verify restricted category pass cannot be issued without required eligibility details."
+  },
+  {
+    "id": "TC_057",
+    "module": "Mobile App > Recharge",
+    "description": "Verify Open/Close loop card recharge supports multiple payment gateways."
+  },
+  {
+    "id": "TC_058",
+    "module": "Mobile App > Recharge",
+    "description": "Verify e-wallet recharge via payment gateway and usable for ticket/pass purchase."
+  },
+  {
+    "id": "TC_059",
+    "module": "Mobile App > Recharge",
+    "description": "Negative: Verify recharge does not complete on network interruption."
+  },
+  {
+    "id": "TC_060",
+    "module": "Mobile App > Personalization",
+    "description": "Verify user can bookmark routes/locations and view saved bookmarks."
+  },
+  {
+    "id": "TC_061",
+    "module": "Mobile App > Personalization",
+    "description": "Verify user can save journey details in advance (date/time/route/mode)."
+  },
+  {
+    "id": "TC_062",
+    "module": "Mobile App > Analytics",
+    "description": "Verify app shows most travelled routes and journey history based analytics."
+  },
+  {
+    "id": "TC_063",
+    "module": "Mobile App > Personalization",
+    "description": "Negative: Verify duplicate bookmark handling."
+  },
+  {
+    "id": "TC_064",
+    "module": "Mobile App > Personalization",
+    "description": "Negative: Verify saved journey cannot be created with missing mandatory fields."
+  },
+  {
+    "id": "TC_065",
+    "module": "Mobile App > Passenger Density",
+    "description": "Verify passenger density is displayed with colour codes for a selected bus/trip."
+  },
+  {
+    "id": "TC_066",
+    "module": "Mobile App > Passenger Density",
+    "description": "Verify passenger density updates when new ETIM/mobile ticket data is received."
+  },
+  {
+    "id": "TC_067",
+    "module": "Mobile App > Passenger Density",
+    "description": "Negative: Verify density is handled gracefully when data is unavailable."
+  },
+  {
+    "id": "TC_068",
+    "module": "Mobile App > SOS",
+    "description": "Verify SOS generates emergency alert and shares commuter location to TMC."
+  },
+  {
+    "id": "TC_069",
+    "module": "Mobile App > SOS",
+    "description": "Verify SOS includes ticket/journey details for booked journey."
+  },
+  {
+    "id": "TC_070",
+    "module": "Mobile App > SOS",
+    "description": "Negative: Verify SOS cannot be sent if location permission is denied."
+  },
+  {
+    "id": "TC_071",
+    "module": "Mobile App > SOS",
+    "description": "Negative: Verify SOS handles no internet scenario."
+  },
+  {
+    "id": "TC_072",
+    "module": "Mobile App > Share Location",
+    "description": "Verify user can select contacts and share live location link via SMS."
+  },
+  {
+    "id": "TC_073",
+    "module": "Mobile App > Share Location",
+    "description": "Verify user can share location via email/instant messaging apps."
+  },
+  {
+    "id": "TC_074",
+    "module": "Mobile App > Share Location",
+    "description": "Negative: Verify share location is blocked when location permission is disabled."
+  },
+  {
+    "id": "TC_075",
+    "module": "Mobile App > Grievance",
+    "description": "Verify commuter can lodge grievance with category, photo, and remarks."
+  },
+  {
+    "id": "TC_076",
+    "module": "Mobile App > Grievance",
+    "description": "Verify grievance can be submitted without photo evidence if optional (if allowed)."
+  },
+  {
+    "id": "TC_077",
+    "module": "Mobile App > Grievance",
+    "description": "Negative: Verify validation when category/remarks are missing."
+  },
+  {
+    "id": "TC_078",
+    "module": "Mobile App > Grievance Integration",
+    "description": "Verify crew details are auto-associated to grievance based on route/time."
+  },
+  {
+    "id": "TC_079",
+    "module": "Mobile App > Grievance Integration",
+    "description": "Negative: Verify fallback handling when crew data is not available."
+  },
+  {
+    "id": "TC_080",
+    "module": "Mobile App > Feedback",
+    "description": "Verify commuter can submit feedback with category and remarks."
+  },
+  {
+    "id": "TC_081",
+    "module": "Mobile App > Feedback",
+    "description": "Verify feedback submission with optional photo evidence."
+  },
+  {
+    "id": "TC_082",
+    "module": "Mobile App > Feedback",
+    "description": "Negative: Verify feedback submission is blocked when mandatory fields are missing."
+  },
+  {
+    "id": "TC_083",
+    "module": "Mobile App > Feedback Status",
+    "description": "Verify commuter can view feedback status and response."
+  },
+  {
+    "id": "TC_084",
+    "module": "Mobile App > Feedback Status",
+    "description": "Verify feedback status updates after NMMT response is added."
+  },
+  {
+    "id": "TC_085",
+    "module": "Mobile App > Feedback Status",
+    "description": "Negative: Verify user cannot access feedback status without login (if authentication is required)."
+  },
+  {
+    "id": "TC_086",
+    "module": "Web Page > Feedback & Grievance",
+    "description": "Verify web page lists all grievances/feedback with responses."
+  },
+  {
+    "id": "TC_087",
+    "module": "Web Page > Feedback & Grievance",
+    "description": "Verify filtering/search works on the grievance/feedback web page."
+  },
+  {
+    "id": "TC_088",
+    "module": "Web Page > Feedback & Grievance",
+    "description": "Negative: Verify unauthorized user cannot access grievances/feedback page."
+  },
+  {
+    "id": "TC_089",
+    "module": "Web Page > Reports",
+    "description": "Verify admin can generate reports for users and service usage."
+  },
+  {
+    "id": "TC_090",
+    "module": "Web Page > Reports",
+    "description": "Verify admin can generate grievance/feedback reports by category/status."
+  },
+  {
+    "id": "TC_091",
+    "module": "Web Page > Reports",
+    "description": "Negative: Verify report generation validation for invalid date range."
+  },
+  {
+    "id": "TC_092",
+    "module": "Admin CMS",
+    "description": "Verify admin can update content via CMS and changes reflect on mobile app."
+  },
+  {
+    "id": "TC_093",
+    "module": "Admin CMS",
+    "description": "Verify admin can create new content entry and publish successfully."
+  },
+  {
+    "id": "TC_094",
+    "module": "Admin CMS",
+    "description": "Negative: Verify CMS prevents saving content with missing mandatory fields."
+  },
+  {
+    "id": "TC_095",
+    "module": "Mobile App > Chat",
+    "description": "Verify user can start a chat and send a message to service department."
+  },
+  {
+    "id": "TC_096",
+    "module": "Mobile App > Chat",
+    "description": "Verify user receives reply/response in chat thread."
+  },
+  {
+    "id": "TC_097",
+    "module": "Mobile App > Chat",
+    "description": "Negative: Verify chat message is not sent when internet is unavailable."
+  },
+  {
+    "id": "TC_098",
+    "module": "Mobile App > Multimodal Journey",
+    "description": "Verify user can view schedules across multiple transport modes from a single screen."
+  },
+  {
+    "id": "TC_099",
+    "module": "Mobile App > Multimodal Journey",
+    "description": "Verify multimodal schedules can be filtered by mode/provider."
+  },
+  {
+    "id": "TC_100",
+    "module": "Mobile App > Multimodal Journey",
+    "description": "Negative: Verify app handles scenario when external provider data is unavailable."
+  },
+  {
+    "id": "TC_101",
+    "module": "Mobile App > Provider Coverage",
+    "description": "Verify app displays participating agencies/providers in multimodal mode list."
+  },
+  {
+    "id": "TC_102",
+    "module": "Mobile App > Provider Coverage",
+    "description": "Verify user can plan a trip using combination of modes when available."
+  },
+  {
+    "id": "TC_103",
+    "module": "Mobile App > Provider Coverage",
+    "description": "Negative: Verify unsupported agency/mode is not shown if not integrated/configured."
+  },
+  {
+    "id": "TC_104",
+    "module": "Mobile App > Multimodal Map",
+    "description": "Verify latest map displays participating PTOs coverage/markers."
+  },
+  {
+    "id": "TC_105",
+    "module": "Mobile App > Multimodal Cost",
+    "description": "Verify app calculates route with journey cost for selected route option."
+  },
+  {
+    "id": "TC_106",
+    "module": "Mobile App > Smart Card / Wallet",
+    "description": "Verify smart card recharge and wallet entry points are accessible from multimodal module."
+  },
+  {
+    "id": "TC_107",
+    "module": "Mobile App > Multimodal Cost",
+    "description": "Negative: Verify app handles missing fare/cost data for a provider leg."
+  },
+  {
+    "id": "TC_108",
+    "module": "Mobile App > Message Relay",
+    "description": "Verify schedule changes published from TMC reflect on mobile app journey/timetable."
+  },
+  {
+    "id": "TC_109",
+    "module": "Mobile App > Message Relay",
+    "description": "Verify dynamic day-to-day changes reflect in live tracking/ETA views."
+  },
+  {
+    "id": "TC_110",
+    "module": "Mobile App > Message Relay",
+    "description": "Negative: Verify app shows proper info when sync fails or TMC update not received."
+  }
+]
