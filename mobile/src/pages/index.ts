@@ -17,3 +17,5 @@ export { TrackABusScreen } from './TrackABusScreen';
 export { MyPassScreen } from './MyPassScreen';
 export { ScheduledTripsScreen } from './ScheduledTripsScreen';
 export { MyTicketScreen } from './MyTicketScreen';
+export { TrackRouteScreen } from './TrackRouteScreen';
+export { NewsAndAlertsScreen } from './NewsAndAlertsScreen';

@@ -98,6 +98,9 @@ mobile/
                             # @wdio/appium-service isn't used directly)
     generate-report.js     # Merges testCaseCatalog.json + automationStatus.json + real run results
                             # into mobile/reports/index.html
+    jenkins-step1-cleanup.bat          # Free port 4723 if a stray Appium process is holding it
+    jenkins-step2-ensure-emulator.bat  # Boot/authorize/DNS-check the emulator - see Jenkins section below
+    jenkins-step3-run-tests.bat        # npm install, run tests, generate report
   src/
     pages/                  # Page objects: BaseScreen + one class per screen
     data/
@@ -135,58 +138,48 @@ APPIUM_PORT=4724 npm run test:android
 
 ### Step-by-step: running the full suite from `cmd.exe`
 
-From `C:\Users\vismay.saraiya\Desktop\automation\mobileapp_automation` in Command Prompt:
+From `C:\Users\vismay.saraiya\Desktop\automation\mobileapp_automation` in Command Prompt, the three scripts below are the same ones Jenkins uses (see the Jenkins section) — running them locally exercises the exact same emulator-recovery logic:
 
-**Step 1 — check nothing is stuck on port 4723**
 ```
-netstat -ano | findstr :4723
-```
-If a line comes back with `LISTENING` and a PID at the end, kill it:
-```
-taskkill /PID <that_pid> /T /F
-```
-If that says "Access is denied", don't fight it — just use a different port for this run (see Step 3).
-
-**Step 2 — confirm the emulator is alive and has working internet**
-```
-adb devices
-```
-Should list `emulator-5554	device`. If it shows nothing, start the emulator and wait ~30s, then check again:
-```
-"%LOCALAPPDATA%\Android\Sdk\emulator\emulator.exe" -avd Medium_Phone_API_36.1
-```
-Then check DNS actually works (the emulator can look "on" but have silently lost internet):
-```
-adb shell ping -c 2 google.com
-```
-If that fails to resolve (but `adb shell ping -c 2 8.8.8.8` works), do a **true cold boot** instead — a normal restart won't fix it:
-```
-"%LOCALAPPDATA%\Android\Sdk\emulator\emulator.exe" -avd Medium_Phone_API_36.1 -no-snapshot-load
+call mobile\scripts\jenkins-step1-cleanup.bat
+call mobile\scripts\jenkins-step2-ensure-emulator.bat
+call mobile\scripts\jenkins-step3-run-tests.bat
 ```
 
-**Step 3 — run the tests**
+To run a single spec file instead of the full suite, set `SPEC_FILE` before step 3:
 ```
-npm run test:android
-```
-Run just one spec file first to confirm things work before committing to the full ~17-file suite:
-```
-npm run test:android:spec ./mobile/test/specs/nearbyAndPoi.spec.ts
-```
-If Step 1 found a stuck process you couldn't kill, run on an alternate port instead:
-```
-set APPIUM_PORT=4724
-npm run test:android
+set SPEC_FILE=./mobile/test/specs/nearbyAndPoi.spec.ts
+call mobile\scripts\jenkins-step3-run-tests.bat
 ```
 
-**Step 4 — generate the HTML report**
-```
-npm run report:mobile
-```
 Then open `mobile\reports\index.html` in your browser.
 
-### Troubleshooting: "my tests aren't running"
+### Jenkins setup (3 build steps)
 
-In practice this has always turned out to be one of these three, in order of likelihood — check them before suspecting a code/locator bug:
+The emulator has turned out to need enough recovery logic (see Troubleshooting below) that it's kept as versioned, independently-testable scripts rather than pasted directly into the Jenkins UI. Add three **"Execute Windows batch command"** build steps to a Freestyle job, in order:
+
+**Build step 1:**
+```bat
+call mobile\scripts\jenkins-step1-cleanup.bat
+```
+
+**Build step 2:**
+```bat
+call mobile\scripts\jenkins-step2-ensure-emulator.bat
+```
+
+**Build step 3:**
+```bat
+call mobile\scripts\jenkins-step3-run-tests.bat
+```
+
+Each step exits non-zero on real failure, so Jenkins stops the build at the right step instead of limping into a later one with a broken emulator. Since these are plain files in the repo, you can also edit/test them locally (as in the section above) without touching the Jenkins job config at all.
+
+Credentials: add `NMMT_TEST_MOBILE`/`NMMT_TEST_PASSWORD` as Jenkins Secret Text credentials, bind them as environment variables of the same name in the job's Build Environment, and write them into `.env` at the start of build step 3 (or add that as its own small step) — never commit real credentials into `.env` itself.
+
+### Troubleshooting: "my tests aren't running" / "emulator won't start"
+
+In practice this has always turned out to be one of these, in order of likelihood — check them before suspecting a code/locator bug. `jenkins-step2-ensure-emulator.bat` now handles all of these automatically; this list is for when you're running things manually or that script itself reports a failure.
 
 1. **A stray Appium process is still holding port 4723** from a previous run that didn't get torn down cleanly (a known Windows quirk where killing the parent doesn't kill the whole process tree). Symptoms: the run hangs at startup, or fails immediately with a port-in-use / connection error.
    ```bash
@@ -195,7 +188,9 @@ In practice this has always turned out to be one of these three, in order of lik
    ```
    If `taskkill` itself reports "Access is denied" (the process is stuck under a different permission context), don't fight it — just run on a different port instead: `APPIUM_PORT=4724 npm run test:android`.
 
-2. **The emulator's virtual network has silently lost DNS resolution.** This can happen mid-session (seen after a host VPN/network change or very long uptime) and looks exactly like a hung UI — every screen that needs a backend call times out waiting for an element, but the emulator otherwise looks "on". Confirm with:
+2. **The device shows as `unauthorized` in `adb devices`.** This happens after an abrupt emulator crash resets its trusted-adb-keys state, and it cannot be fixed from a script — someone needs to tap "Always allow from this computer" on the emulator's own screen, then re-run. `jenkins-step2-ensure-emulator.bat` detects this and fails loudly with that instruction rather than hanging forever waiting for an adb command that will never succeed.
+
+3. **The emulator's virtual network has silently lost DNS resolution.** This can happen mid-session (seen after a host VPN/network change or very long uptime) and looks exactly like a hung UI — every screen that needs a backend call times out waiting for an element, but the emulator otherwise looks "on". Confirm with:
    ```bash
    adb shell ping -c 2 google.com   # fails to resolve even though raw IP (adb shell ping -c 2 8.8.8.8) works fine
    ```
@@ -203,10 +198,15 @@ In practice this has always turned out to be one of these three, in order of lik
    ```bash
    emulator -avd Medium_Phone_API_36.1 -no-snapshot-load
    ```
+   Also kill **both** `emulator.exe` and `qemu-system-x86_64.exe` (with `/T /F`) before that cold boot — killing only the launcher leaves the actual VM process holding the AVD's lock, so the new instance silently fails to start.
 
-3. **The emulator process itself has died** (crashed under sustained load — seen once during a very long unattended full-suite run). `adb devices` returns nothing and no `qemu-system-x86_64.exe` process exists. Just relaunch it (a normal snapshot-resume boot is fine here, unlike case 2):
+   Watch out for a false positive here: `sys.boot_completed` can flip to 1 a few seconds before the network stack has actually finished settling, so a DNS check run immediately after boot can wrongly report "broken" and trigger a needless cold-reboot cycle. Retry the check 2-3 times a few seconds apart before concluding it's actually broken (this is what `jenkins-step2-ensure-emulator.bat` does).
+
+4. **The emulator process itself has died** (crashed under sustained load — seen once during a very long unattended full-suite run). `adb devices` returns nothing and no `qemu-system-x86_64.exe` process exists. Just relaunch it (a normal snapshot-resume boot is fine here, unlike case 3):
    ```bash
    emulator -avd Medium_Phone_API_36.1
    ```
+
+5. **Under Jenkins specifically, the emulator takes far longer to boot than it does when you run it yourself.** This points to hardware acceleration (WHPX/Hyper-V) not being available to whatever Windows account Jenkins runs under, silently falling back to slow software CPU emulation. `jenkins-step2-ensure-emulator.bat` launches with `-accel on` (fails loudly instead of silently degrading) and redirects the emulator's own log to `%WORKSPACE%\emulator-boot.log`, printed into the Jenkins console on failure — check it for `WHPX`/`HAXM`/`Requested engine` messages. Fix: add that Windows account to the **Hyper-V Administrators** local group and restart Jenkins.
 
 Given the emulator's fragility under long unattended runs, prefer running a handful of spec files at a time over the full 17-file suite in one go until this is hardened further.

@@ -34,7 +34,15 @@ describe('My Pass (signed in)', () => {
   });
 
   it('TC_054 - shows transit product durations for a Route Specific Pass', async () => {
-    await myPass.selectPassCategory('Route Specific Pass');
+    await myPass.selectPassCategory('Route Pass');
     await myPass.expectPassDurationOptionsVisible();
+  });
+
+  it('TC_056 - keeps Proceed for Verification disabled without mandatory fields', async () => {
+    await myPass.selectPassCategory('Route Pass');
+    await myPass.selectPassDuration('Monthly Pass');
+    await myPass.selectFareCategory('Student');
+    // Gender, Service Type and Date of Birth are all still unset.
+    await expect(await myPass.isProceedForVerificationEnabled()).toBe(false);
   });
 });
